@@ -70,17 +70,17 @@ export const setupScrollTriggers = () => {
 // Off-canvas menu animations
 export const setupOffcanvasMenu = (isOpen: boolean, menuItems: HTMLElement[], socialIcons: HTMLElement[]) => {
   if (isOpen) {
-    // Animate menu items when opened - staggered entrance for larger text items
+    // Animate menu items when opened
     gsap.fromTo(
       menuItems,
-      { y: 60, opacity: 0 },
+      { y: 40, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.9,
-        stagger: 0.12,
+        duration: 0.8,
+        stagger: 0.1,
         ease: "power3.out",
-        delay: 0.3
+        delay: 0.2
       }
     );
 
@@ -92,9 +92,9 @@ export const setupOffcanvasMenu = (isOpen: boolean, menuItems: HTMLElement[], so
         y: 0,
         opacity: 1,
         duration: 0.6,
-        stagger: 0.08,
+        stagger: 0.1,
         ease: "power2.out",
-        delay: 0.9 // Increased delay to ensure menu items are visible first
+        delay: 0.7
       }
     );
   } else {
