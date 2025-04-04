@@ -47,11 +47,6 @@ function App() {
         window.scrollTo(0, 0);
       };
     }
-    
-    return () => {
-      // Cleanup any animations on unmount
-      window.scrollTo(0, 0);
-    };
   }, []);
 
   return (
