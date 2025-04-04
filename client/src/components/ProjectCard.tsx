@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { Project, ProjectFeature } from "@shared/types";
 import gsap from "gsap";
 import { CheckIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface FeatureItemProps {
   feature: ProjectFeature;
@@ -55,65 +56,94 @@ const ProjectCard = ({ project, delay = 0, isEven = false }: ProjectCardProps) =
   }, [delay]);
 
   return (
-    <article 
+    <motion.article 
       ref={cardRef}
-      className="flex flex-col lg:flex-row gap-x-16 gap-y-10"
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
+      className="bg-[#111] border border-gray-800 rounded-2xl overflow-hidden shadow-xl p-0"
     >
-      {/* Left Side - Image */}
-      <div className={`w-full lg:w-2/5 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
-        <div className="aspect-video rounded-lg overflow-hidden shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
-          <img 
-            src={project.imageUrl} 
-            alt={project.title} 
-            className="w-full h-full object-cover parallax"
-            data-parallax="true"
-            data-direction={isEven ? "up" : "down"}
-            data-speed="0.15"
-          />
+      {/* Project Card Header with Image */}
+      <div className="relative">
+        <img 
+          src={project.imageUrl} 
+          alt={project.title} 
+          className="w-full h-64 object-cover"
+        />
+        <div className="absolute top-4 right-4 flex space-x-2">
+          <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-full">
+            {new Date().getFullYear()}
+          </div>
+          <div className="bg-green-500 bg-opacity-70 text-white text-xs px-3 py-1 rounded-full">
+            UI/UX
+          </div>
         </div>
       </div>
       
-      {/* Right Side - Content */}
-      <div className={`flex-1 ${isEven ? 'lg:order-1 lg:pr-8' : 'lg:order-2 lg:pl-8'}`}>
-        <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">{project.title}</h3>
-        
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-5">
-          {project.tags.map((tag, index) => (
-            <span 
-              key={index}
-              className={`px-3 py-1 rounded-full text-xs font-medium ${tag.bgColor} ${tag.textColor}`}
-            >
-              {tag.name}
-            </span>
-          ))}
+      {/* Project Details */}
+      <div className="p-6">
+        <div className="flex justify-between items-start mb-4">
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{project.title}</h3>
+            <p className="text-gray-400 text-sm">Marketing Collaboration Platform</p>
+          </div>
+          
+          <div className="flex space-x-2">
+            <span className="text-gray-400 text-xs border border-gray-700 rounded-full px-2 py-1">Share</span>
+            <span className="text-gray-400 text-xs border border-gray-700 rounded-full px-2 py-1">Details</span>
+          </div>
         </div>
         
         {/* Description */}
-        <p className="text-gray-300 mb-8 leading-relaxed">
+        <p className="text-gray-300 mb-6 leading-relaxed text-sm">
           {project.description}
         </p>
         
-        {/* Features */}
-        <div className="mt-6 space-y-3">
-          {project.features.map((feature, index) => (
-            <FeatureItem key={index} feature={feature} />
-          ))}
+        {/* Team Members */}
+        <div className="mt-6 border-t border-gray-800 pt-4">
+          <h4 className="text-white text-sm font-medium mb-3">Team Members</h4>
+          <div className="flex -space-x-2">
+            <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">JD</div>
+            <div className="w-8 h-8 rounded-full bg-green-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">MK</div>
+            <div className="w-8 h-8 rounded-full bg-purple-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">SL</div>
+            <div className="w-8 h-8 rounded-full bg-orange-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">AR</div>
+            <div className="w-8 h-8 rounded-full bg-gray-700 border-2 border-[#111] flex items-center justify-center text-xs text-white">+3</div>
+          </div>
         </div>
         
-        {/* Link - If available */}
-        {project.link && (
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-block mt-8 px-6 py-3 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 transition-colors duration-200"
-          >
-            View Project
-          </a>
-        )}
+        {/* Actions */}
+        <div className="mt-6 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <div className="text-gray-400 flex items-center space-x-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span className="text-xs">San Francisco</span>
+            </div>
+            <div className="text-gray-400 flex items-center space-x-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
+                <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
+              </svg>
+              <span className="text-xs">12 Tasks</span>
+            </div>
+          </div>
+          
+          {project.link && (
+            <motion.a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-xs text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              View Project
+            </motion.a>
+          )}
+        </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 
