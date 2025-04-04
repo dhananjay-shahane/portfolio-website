@@ -65,7 +65,10 @@ const ProjectCard = ({ project, delay = 0, isEven = false }: ProjectCardProps) =
           <img 
             src={project.imageUrl} 
             alt={project.title} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover parallax"
+            data-parallax="true"
+            data-direction={isEven ? "up" : "down"}
+            data-speed="0.15"
           />
         </div>
       </div>

@@ -9,7 +9,12 @@ import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
-import { setupScrollTriggers, setupSmoothScroll } from "./lib/animations";
+import { 
+  setupScrollTriggers, 
+  setupSmoothScroll, 
+  setupCustomSmoothScroll,
+  setupParallaxEffects
+} from "./lib/animations";
 import { gsapInit } from "./lib/gsap";
 
 function App() {
@@ -19,13 +24,28 @@ function App() {
     // Initialize GSAP
     gsapInit();
     
-    // Setup scroll triggers and smooth scrolling once the app is mounted
+    // Setup scroll triggers and animations once the app is mounted
     if (appRef.current) {
       // Small timeout to ensure DOM is fully rendered
-      setTimeout(() => {
+      let cleanupFunction: (() => void) | undefined;
+      
+      const timeoutId = setTimeout(() => {
+        // Initialize all scroll and parallax animations
         setupScrollTriggers();
         setupSmoothScroll();
+        setupParallaxEffects();
+        cleanupFunction = setupCustomSmoothScroll();
       }, 100);
+      
+      return () => {
+        clearTimeout(timeoutId);
+        // Call cleanup if it exists
+        if (cleanupFunction) {
+          cleanupFunction();
+        }
+        // Reset scroll position
+        window.scrollTo(0, 0);
+      };
     }
     
     return () => {

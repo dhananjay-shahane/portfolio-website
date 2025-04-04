@@ -134,6 +134,9 @@ const HeroSection = () => {
       <div 
         ref={textLayerRef}
         className="absolute inset-0 flex flex-wrap opacity-100 overflow-hidden z-0"
+        data-parallax="true"
+        data-direction="up"
+        data-speed="0.2"
       >
         <div 
           ref={overlayTextRef}
@@ -171,6 +174,9 @@ const HeroSection = () => {
                 src="/images/chris-avatar.webp"
                 alt="Chris Abra" 
                 className="w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-full border-4 border-indigo-500 shadow-xl shadow-indigo-500/20 relative z-10"
+                data-parallax="true"
+                data-direction="down"
+                data-speed="0.1"
               />
             </picture>
           </motion.div>

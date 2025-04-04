@@ -9,7 +9,7 @@ export const projects: Project[] = [
       { name: "Airtable", bgColor: "bg-pink-400", textColor: "text-pink-900" }
     ],
     description: "I built Impact Volleyball's online home and platform, which allows volleyball athletes and enthusiasts to register for their online physical training programs, along with the promotion of their upcoming events and camps.",
-    imageUrl: "https://images.unsplash.com/photo-1588286840104-8957b019727f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    imageUrl: "/images/project1.png",
     features: [
       {
         title: "Memberstack Integration",
@@ -34,7 +34,7 @@ export const projects: Project[] = [
       { name: "Zapier", bgColor: "bg-orange-400", textColor: "text-orange-900" }
     ],
     description: "Due to a lack of available software options that were sufficient for our needs, I built a custom order management system for Passion Sports. The initial version launched as a basic Airtable system with simple Slack integrations in April 2017. I completely rebuilt the system from scratch in February 2019 to incorporate much more advanced Zapier integrations and provide more automations for the team.",
-    imageUrl: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    imageUrl: "/images/project2.png",
     features: [
       {
         title: "Airtable Production Base",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
       { name: "Spline 3D", bgColor: "bg-orange-400", textColor: "text-orange-900" }
     ],
     description: "One of my favourite companies to work with and a project that really pushed myself into a couple of new spaces (Spline 3D and custom ecommerce integrations), the PulpCulture website was a great challenge for me.",
-    imageUrl: "https://images.unsplash.com/photo-1532634922-8fe7ca0df265?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    imageUrl: "/images/project3.png",
     features: [
       {
         title: "Ecommerce Integration",
@@ -77,6 +77,62 @@ export const projects: Project[] = [
       {
         title: "Custom Landing Page System",
         description: "More recently, we've added a custom landing page system for their marketing team to quickly roll out landing pages for new campaigns and products.",
+        color: "pink"
+      }
+    ]
+  },
+  {
+    title: "Fintech Dashboard",
+    tags: [
+      { name: "React", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "TypeScript", bgColor: "bg-blue-600", textColor: "text-white" },
+      { name: "Chart.js", bgColor: "bg-green-400", textColor: "text-green-900" },
+      { name: "TailwindCSS", bgColor: "bg-teal-400", textColor: "text-teal-900" }
+    ],
+    description: "An advanced financial dashboard allowing users to track investments, monitor market trends, and manage their portfolio all in one place. The project required complex data visualization and real-time updates.",
+    imageUrl: "/images/project4.png",
+    features: [
+      {
+        title: "Real-time Data Visualization",
+        description: "Implemented interactive charts and graphs using Chart.js to display complex financial data in an intuitive and user-friendly way.",
+        color: "blue"
+      },
+      {
+        title: "Portfolio Management",
+        description: "Created a comprehensive system for users to track and manage their investment portfolio with real-time updates and historical performance analysis.",
+        color: "yellow"
+      },
+      {
+        title: "Market Analysis Tools",
+        description: "Developed advanced tools for technical analysis, including moving averages, RSI indicators, and custom alert systems for price movements.",
+        color: "pink"
+      }
+    ]
+  },
+  {
+    title: "E-Learning Platform",
+    tags: [
+      { name: "Next.js", bgColor: "bg-black", textColor: "text-white" },
+      { name: "Firebase", bgColor: "bg-yellow-500", textColor: "text-white" },
+      { name: "Stripe", bgColor: "bg-purple-500", textColor: "text-white" },
+      { name: "Framer Motion", bgColor: "bg-pink-500", textColor: "text-white" }
+    ],
+    description: "A comprehensive online learning platform with course creation tools, student progress tracking, and integrated payment processing for instructors to monetize their educational content.",
+    imageUrl: "/images/project5.png",
+    features: [
+      {
+        title: "Interactive Course Builder",
+        description: "Created an intuitive drag-and-drop interface for instructors to design courses with videos, quizzes, and assignments without requiring technical knowledge.",
+        color: "blue"
+      },
+      {
+        title: "Student Analytics Dashboard",
+        description: "Developed detailed analytics for both students and instructors to track progress, identify learning patterns, and optimize the educational experience.",
+        color: "yellow"
+      },
+      {
+        title: "Seamless Payment Integration",
+        description: "Implemented Stripe for handling course purchases, subscription plans, and revenue sharing between the platform and instructors.",
         color: "pink"
       }
     ]
