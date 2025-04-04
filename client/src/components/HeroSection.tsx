@@ -2,21 +2,53 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 
-// Create an array of roles with different colors - exact match to reference UI
-const backgroundRoles = [
-  { text: "DESIGNER", color: "#8A8A8A" },
-  { text: "PROBLEM", color: "#8A8A8A" },
-  { text: "SOLVER", color: "#A15DE0" },
-  { text: "TECH", color: "#8A8A8A" },
-  { text: "GENERALIST", color: "#61A0FF" },
-  { text: "WEBFLOW", color: "#8A8A8A" },
-  { text: "DEVELOPER", color: "#FF7F48" },
-  { text: "FREELANCE", color: "#8A8A8A" },
-  { text: "DESIGNER", color: "#E0AE34" },
+// Create an array of roles with different colors - MORE TEXT FOR FULLSCREEN
+const roles = [
+  { text: "DESIGNER", color: "text-amber-400" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-purple-400" },
+  { text: "TECH", color: "text-gray-500" },
+  { text: "GENERALIST", color: "text-blue-400" },
+  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "DEVELOPER", color: "text-orange-500" },
+  { text: "FREELANCE", color: "text-gray-500" },
+  { text: "DESIGNER", color: "text-yellow-400" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-pink-400" },
+  { text: "TECH", color: "text-gray-500" },
+  { text: "GENERALIST", color: "text-blue-500" },
+  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "DEVELOPER", color: "text-red-500" },
+  { text: "FREELANCE", color: "text-gray-500" },
+  { text: "DESIGNER", color: "text-amber-500" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-violet-400" },
+  { text: "TECH", color: "text-gray-500" },
+  { text: "GENERALIST", color: "text-blue-400" },
+  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "DEVELOPER", color: "text-orange-500" },
+  { text: "FREELANCE", color: "text-gray-500" },
+  { text: "DESIGNER", color: "text-yellow-400" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-purple-400" },
+  { text: "TECH", color: "text-gray-500" },
+  { text: "GENERALIST", color: "text-blue-400" },
+  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "DEVELOPER", color: "text-orange-500" },
+  { text: "FREELANCE", color: "text-gray-500" },
+  { text: "DESIGNER", color: "text-amber-400" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-pink-400" },
+  { text: "TECH", color: "text-gray-500" },
+  { text: "GENERALIST", color: "text-blue-500" },
+  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "DEVELOPER", color: "text-red-500" },
+  { text: "FREELANCE", color: "text-gray-500" },
+  { text: "DESIGNER", color: "text-amber-500" },
+  { text: "PROBLEM", color: "text-gray-500" },
+  { text: "SOLVER", color: "text-violet-400" },
+  { text: "TECH", color: "text-gray-500" },
 ];
-
-// Duplicate the roles array to fill the screen (9 roles per row, 6-7 rows)
-const roles = Array(6).fill(backgroundRoles).flat();
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -39,7 +71,7 @@ const HeroSection = () => {
       }, 0);
     }
     
-    // Animate the central text elements
+    // Animate the central elements
     if (centralTextRef.current) {
       tl.from(centralTextRef.current.children, {
         opacity: 0,
@@ -70,6 +102,17 @@ const HeroSection = () => {
       ease: "sine.inOut"
     });
     
+    // Create a subtle scale animation for the text layer
+    if (textLayerRef.current) {
+      gsap.to(textLayerRef.current, {
+        scale: 1.01,
+        duration: 8,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    }
+    
     return () => {
       tl.kill();
     };
@@ -81,28 +124,29 @@ const HeroSection = () => {
       ref={heroRef}
       className="h-screen relative overflow-hidden flex items-center justify-center"
       style={{
-        background: "#121212" // Exact black background from reference
+        background: "linear-gradient(to bottom, #12141d 0%, #1a1d2d 100%)"
       }}
     >
-      {/* Background text pattern - Fixed positioning to fill the screen */}
+      {/* Dark overlay with transparency */}
+      <div className="absolute inset-0 bg-black/30 z-10"></div>
+      
+      {/* Background text overlay - fullscreen */}
       <div 
         ref={textLayerRef}
-        className="absolute inset-0 overflow-hidden z-0"
-        style={{ backgroundColor: "#121212" }}
+        className="absolute inset-0 flex flex-wrap opacity-100 overflow-hidden z-0"
       >
         <div 
           ref={overlayTextRef}
-          className="hero-bg-pattern w-full h-full p-6 opacity-80"
+          className="flex flex-wrap text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold opacity-70 p-4 w-full h-full"
+          style={{ 
+            lineHeight: '1.1', 
+            userSelect: 'none',
+            justifyContent: 'space-evenly',
+            alignContent: 'space-around'
+          }}
         >
           {roles.map((role, index) => (
-            <span 
-              key={index} 
-              style={{ 
-                color: role.color,
-                whiteSpace: 'nowrap'
-              }}
-              className="truncate"
-            >
+            <span key={index} className={`${role.color} mx-1 my-1 whitespace-nowrap`}>
               {role.text}.
             </span>
           ))}
@@ -110,54 +154,51 @@ const HeroSection = () => {
       </div>
       
       {/* Central content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        {/* Character image */}
-        <motion.div 
-          className="mb-6"
-          initial={{ scale: 1 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <picture>
-            <source srcSet="/images/chris-avatar.avif" type="image/avif" />
-            <source srcSet="/images/chris-avatar.webp" type="image/webp" />
-            <img 
-              ref={imageRef}
-              src="/images/chris-avatar.webp"
-              alt="Chris Abra" 
-              className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 object-contain"
-              style={{ maxWidth: '250px' }}
-            />
-          </picture>
-        </motion.div>
-        
-        {/* Central text - Exact match to reference UI */}
-        <div ref={centralTextRef} className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-1" style={{ lineHeight: 1.1 }}>
-            <span className="text-white">WEBFLOW</span>
-            <span style={{ color: "#FF7F48" }}> DEVELOPER.</span>
-          </h1>
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-1" style={{ lineHeight: 1.1 }}>
-            <span style={{ color: "#FFD954" }}>FREELANCE</span>
-            <span className="text-white"> DESIGNER.</span>
-          </h2>
-          <h3 className="text-4xl sm:text-5xl font-extrabold mb-1" style={{ lineHeight: 1.1 }}>
-            <span style={{ color: "#A15DE0" }}>PROBLEM</span>
-            <span className="text-white"> SOLVER.</span>
-          </h3>
-          <h4 className="text-4xl sm:text-5xl font-extrabold" style={{ lineHeight: 1.1 }}>
-            <span style={{ color: "#61A0FF" }}>TECH</span>
-            <span className="text-white"> GENERALIST.</span>
-          </h4>
+      <div className="container relative z-20 px-4 max-w-6xl mx-auto">
+        <div className="flex flex-col items-center">
+          {/* Character image */}
+          <motion.div 
+            className="relative mb-6"
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <picture>
+              <source srcSet="/images/chris-avatar.avif" type="image/avif" />
+              <source srcSet="/images/chris-avatar.webp" type="image/webp" />
+              <img 
+                ref={imageRef}
+                src="/images/chris-avatar.webp"
+                alt="Chris Abra" 
+                className="w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-full border-4 border-indigo-500 shadow-xl shadow-indigo-500/20 relative z-10"
+              />
+            </picture>
+          </motion.div>
+          
+          {/* Central text */}
+          <div ref={centralTextRef} className="text-center">
+            <h1 className="font-extrabold text-white text-3xl md:text-5xl lg:text-6xl mb-3">
+              <span className="text-white">WEBFLOW</span>
+              <span className="text-orange-500"> DEVELOPER.</span>
+            </h1>
+            <h2 className="font-extrabold text-white text-3xl md:text-5xl lg:text-6xl mb-4">
+              <span className="text-yellow-400">FREELANCE</span>
+              <span className="text-white"> DESIGNER.</span>
+            </h2>
+            <h3 className="font-extrabold text-white text-2xl md:text-4xl lg:text-5xl mb-2">
+              <span className="text-purple-500">PROBLEM</span>
+              <span className="text-white"> SOLVER.</span>
+            </h3>
+            <h4 className="font-extrabold text-white text-2xl md:text-4xl lg:text-5xl">
+              <span className="text-blue-500">TECH</span>
+              <span className="text-white"> GENERALIST.</span>
+            </h4>
+          </div>
         </div>
       </div>
       
-      {/* Rainbow border at bottom - exact colors from reference */}
-      <div className="absolute bottom-0 left-0 right-0 h-3 z-20" 
-        style={{ 
-          background: "linear-gradient(to right, #8B5CF6, #EC4899, #EF4444, #F59E0B, #10B981, #3B82F6)"
-        }}>
-      </div>
+      {/* Bottom rainbow border */}
+      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-indigo-500 via-purple-500 via-pink-500 via-red-500 via-yellow-500 to-green-500 z-20"></div>
     </section>
   );
 };
