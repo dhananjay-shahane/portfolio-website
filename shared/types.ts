@@ -1,14 +1,23 @@
+export interface ProjectFeature {
+  title: string;
+  description: string;
+  color: string; // 'blue', 'yellow', 'pink'
+}
+
+export interface ProjectTag {
+  name: string;
+  bgColor: string;
+  textColor: string;
+}
+
 export interface Project {
   title: string;
-  tag: string;
-  description: string[];
+  tags: ProjectTag[];
+  description: string;
   imageUrl: string;
-  backgroundColor: string;
-  tagBackgroundColor: string;
-  tagTextColor: string;
-  textColor: string;
-  launchDateLabel?: string;
-  launchDate?: string;
+  features: ProjectFeature[];
+  backgroundColor?: string;
+  textColor?: string;
   link?: string;
 }
 

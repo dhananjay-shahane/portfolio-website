@@ -13,25 +13,25 @@ const ProjectsSection = () => {
     <section 
       id="projects" 
       ref={sectionRef}
-      className="py-20 bg-pink-500 gsap-reveal"
+      className="py-20 bg-black gsap-reveal"
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-pink-900">WHAT I'M WORKING ON</h2>
-        <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white">Current Projects</h3>
+      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+        <h2 className="text-sm md:text-base font-medium mb-2 text-indigo-400 uppercase tracking-wider">WHAT I'VE BUILT</h2>
+        <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white">Case Studies</h3>
         
-        <p className="text-lg text-pink-100 mb-12 max-w-3xl">
-          I'm keeping this section updated with a selection of the projects I am currently tackling as a 
-          web designer and digital designer. From website overhauls to business automation systems 
-          to side projects, this will offer a glimpse into my current daily work and the type of projects I 
-          am currently focused on.
+        <p className="text-lg text-gray-300 mb-16 max-w-3xl">
+          Here are a few small case studies of some of my favourite projects that I have completed in
+          the past few years. I've tried to select a variety of projects, including complex business
+          automation systems, website designs, and more unique web application style builds.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="space-y-20">
           {projects.map((project, index) => (
             <ProjectCard
               key={index}
               project={project}
               delay={index * 0.2}
+              isEven={index % 2 !== 0}
             />
           ))}
         </div>
