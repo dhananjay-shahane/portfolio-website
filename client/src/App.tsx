@@ -9,15 +9,23 @@ import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
-import { setupScrollTriggers } from "./lib/animations";
+import { setupScrollTriggers, setupSmoothScroll } from "./lib/animations";
+import { gsapInit } from "./lib/gsap";
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Setup scroll triggers once the app is mounted
+    // Initialize GSAP
+    gsapInit();
+    
+    // Setup scroll triggers and smooth scrolling once the app is mounted
     if (appRef.current) {
-      setupScrollTriggers();
+      // Small timeout to ensure DOM is fully rendered
+      setTimeout(() => {
+        setupScrollTriggers();
+        setupSmoothScroll();
+      }, 100);
     }
     
     return () => {

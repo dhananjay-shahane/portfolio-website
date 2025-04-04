@@ -36,6 +36,33 @@
   .grid-bg-pattern {
     @apply bg-[radial-gradient(#333_1px,transparent_1px)] bg-[length:20px_20px] opacity-20;
   }
+  
+  /* Menu button animation */
+  .menu-icon {
+    @apply flex flex-col justify-center items-center w-8 h-8 cursor-pointer;
+  }
+  
+  .menu-icon span {
+    @apply transform transition-all duration-300 ease-in-out;
+  }
+  
+  /* Offcanvas menu styles */
+  .menu-item {
+    @apply relative inline-block cursor-pointer;
+  }
+  
+  .menu-item::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-0.5 bg-indigo-500 transition-all duration-300 ease-in-out;
+  }
+  
+  .menu-item:hover::after {
+    @apply w-full;
+  }
+  
+  .social-icon {
+    @apply rounded-full hover:scale-110 transition-all duration-300;
+  }
 }
 
 /* Mobile menu transition */

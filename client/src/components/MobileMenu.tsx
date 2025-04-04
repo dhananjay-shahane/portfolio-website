@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Instagram, Linkedin, Github, Mail } from "lucide-react";
+import { setupOffcanvasMenu } from "@/lib/animations";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -10,6 +11,9 @@ interface MobileMenuProps {
 }
 
 const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuItemsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Prevent body scroll when menu is open
     if (isOpen) {
@@ -23,6 +27,17 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
     };
   }, [isOpen]);
 
+  // GSAP animation for menu items
+  useEffect(() => {
+    if (menuItemsRef.current) {
+      const menuItems = Array.from(menuItemsRef.current.querySelectorAll(".menu-item")) as HTMLElement[];
+      const socialIcons = Array.from(menuItemsRef.current.querySelectorAll(".social-icon")) as HTMLElement[];
+      
+      // Use the animation utility for consistent animations
+      setupOffcanvasMenu(isOpen, menuItems, socialIcons);
+    }
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -32,41 +47,22 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
             onClick={onClose}
           />
           
-          {/* Menu */}
-          <motion.div 
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 w-72 bg-gray-900 shadow-lg z-50 overflow-y-auto"
+          {/* Offcanvas Menu */}
+          <div 
+            ref={menuRef}
+            className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
           >
-            <div className="p-6">
-              <Button 
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 text-white hover:bg-gray-800"
-                onClick={onClose}
-              >
-                <X className="h-6 w-6" />
-              </Button>
-              
-              <div className="mt-16 mb-6">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-white">CA</span>
-                </div>
-                <h2 className="text-white text-xl font-bold">Chris Abra</h2>
-                <p className="text-gray-400 text-sm mt-1">Webflow Developer & Designer</p>
-              </div>
-              
-              <div className="flex flex-col space-y-6">
+            <div ref={menuItemsRef} className="container max-w-6xl mx-auto px-6 py-20 relative">
+              {/* Menu items */}
+              <div className="flex flex-col items-center md:items-start space-y-8 text-center md:text-left">
                 <a 
                   href="#about" 
-                  className="text-gray-200 hover:text-white transition-colors py-2 text-lg font-medium border-b border-gray-800 pb-3"
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
                     onNavItemClick("about");
@@ -76,7 +72,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                 </a>
                 <a 
                   href="#skills" 
-                  className="text-gray-200 hover:text-white transition-colors py-2 text-lg font-medium border-b border-gray-800 pb-3"
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
                     onNavItemClick("skills");
@@ -86,7 +82,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                 </a>
                 <a 
                   href="#projects" 
-                  className="text-gray-200 hover:text-white transition-colors py-2 text-lg font-medium border-b border-gray-800 pb-3"
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
                     onNavItemClick("projects");
@@ -94,18 +90,35 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                 >
                   Projects
                 </a>
+                <a 
+                  href="#contact" 
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavItemClick("contact");
+                  }}
+                >
+                  Contact
+                </a>
                 
-                <div className="pt-4">
-                  <Button 
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-6 rounded-md transition-colors text-lg font-medium"
-                    onClick={() => onNavItemClick("contact")}
-                  >
-                    Contact Me
-                  </Button>
+                {/* Social links */}
+                <div className="flex flex-wrap justify-center md:justify-start space-x-5 pt-10 mt-6 border-t border-gray-800 w-full">
+                  <a href="#" className="social-icon text-gray-400 hover:text-white transition-colors p-2">
+                    <Instagram size={24} />
+                  </a>
+                  <a href="#" className="social-icon text-gray-400 hover:text-white transition-colors p-2">
+                    <Linkedin size={24} />
+                  </a>
+                  <a href="#" className="social-icon text-gray-400 hover:text-white transition-colors p-2">
+                    <Github size={24} />
+                  </a>
+                  <a href="mailto:hello@chrisabra.co" className="social-icon text-gray-400 hover:text-white transition-colors p-2">
+                    <Mail size={24} />
+                  </a>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
