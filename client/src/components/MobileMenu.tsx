@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Linkedin, Github, Mail } from "lucide-react";
+import { Instagram, Linkedin, Github, Mail, X } from "lucide-react";
 import { setupOffcanvasMenu } from "@/lib/animations";
 
 interface MobileMenuProps {
@@ -38,6 +38,12 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
     }
   }, [isOpen]);
 
+  // Function to handle close button click
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent event from bubbling up
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -48,9 +54,26 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
+            className="fixed inset-0 bg-black/90 backdrop-blur-md z-40"
             onClick={onClose}
           />
+          
+          {/* Close button - fixed position */}
+          <div className="fixed top-5 right-4 md:right-6 z-[60]">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-white hover:bg-transparent hover:text-indigo-300"
+              onClick={handleCloseClick}
+              aria-label="Close menu"
+            >
+              <div className="menu-icon open">
+                <span className="block w-6 h-0.5 bg-white transition-all duration-300 rotate-45 translate-y-1.5"></span>
+                <span className="block w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 opacity-0"></span>
+                <span className="block w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 -rotate-45 -translate-y-1.5"></span>
+              </div>
+            </Button>
+          </div>
           
           {/* Offcanvas Menu */}
           <div 

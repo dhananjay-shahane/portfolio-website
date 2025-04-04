@@ -40,7 +40,7 @@ const Header = () => {
     const headerHeight = document.querySelector("header")?.offsetHeight || 0;
     
     if (section) {
-      const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      const targetPosition = section.getBoundingClientRect().top + window.scrollY - headerHeight;
       window.scrollTo({
         top: targetPosition,
         behavior: "smooth",
@@ -52,35 +52,31 @@ const Header = () => {
     <>
       <header 
         ref={headerRef}
-        className={`fixed top-0 left-0 right-0 z-50 py-5 transition-all duration-300 ${
-          isScrolled ? "bg-gray-950/90 backdrop-blur-sm border-b border-gray-800" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
+          isScrolled ? "bg-black/95 shadow-lg" : "bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-6 max-w-6xl flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-6 max-w-7xl flex justify-between items-center">
           {/* Logo */}
-          <a href="#" className="flex items-center space-x-2 z-50 relative" onClick={(e) => {
+          <a href="#" className="flex items-center space-x-2 z-50 relative group" onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}>
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-indigo-600 flex items-center justify-center">
               <span className="text-xl font-bold text-white">CA</span>
             </div>
             <span className="font-semibold text-white text-lg">Chris Abra</span>
           </a>
 
-          {/* Menu Button - Always visible regardless of device */}
+          {/* Menu Button */}
           <Button 
             variant="ghost" 
             size="icon" 
-            className="text-white z-50 relative"
+            className="text-white hover:bg-transparent hover:text-indigo-300 transition-colors"
             onClick={toggleMenu}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label="Open menu"
           >
-            <div className={`menu-icon ${isMenuOpen ? 'open' : ''}`}>
-              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`block w-6 h-0.5 bg-white mt-1.5 transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
-            </div>
+            <Menu className="h-6 w-6" />
           </Button>
         </div>
       </header>
