@@ -1,60 +1,113 @@
 import { motion } from "framer-motion";
+import { FiTwitter, FiBookOpen } from "react-icons/fi";
+import { AiOutlineLinkedin } from "react-icons/ai";
+import { SiSubstack } from "react-icons/si";
 
 const Footer = () => {
   return (
     <footer className="py-16 bg-black">
       <div className="container mx-auto px-4 md:px-6 max-w-5xl">
-        <div className="flex flex-col items-center">
-          {/* Logo */}
-          <div className="mb-8">
-            <motion.div 
-              className="w-16 h-16 mx-auto"
-              initial={{ rotate: 0 }}
-              whileHover={{ rotate: 10, scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 200 }}
-            >
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                <defs>
-                  <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#4F46E5" />
-                    <stop offset="50%" stopColor="#EC4899" />
-                    <stop offset="100%" stopColor="#F59E0B" />
-                  </linearGradient>
-                </defs>
-                <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="url(#logoGradient)" />
-                <circle cx="70" cy="30" r="12" fill="#FFF" fillOpacity="0.3" />
-              </svg>
-            </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Contact Information - Left Column */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-white text-xl font-bold mb-3">Contact</h3>
+              <p className="text-gray-400 text-sm">
+                Reach out for work, collab, or<br />
+                mentoring: hola@oriol.design
+              </p>
+            </div>
+
+            <div>
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center space-x-2 bg-black border border-white rounded-full px-5 py-2 text-white"
+              >
+                <span className="text-sm">Book intro</span>
+              </motion.button>
+            </div>
+
+            {/* Logo */}
+            <div className="mt-8">
+              <div className="flex">
+                <div className="relative w-40 h-40">
+                  <div className="absolute w-full h-full rounded-full bg-black flex items-center justify-center">
+                    <div className="w-20 h-20 rotate-45 bg-red-500"></div>
+                  </div>
+                </div>
+                <div className="relative ml-4 h-40">
+                  <div className="w-24 h-full bg-black flex items-end">
+                    <div className="w-full h-1/3 bg-purple-400"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          {/* Divider line */}
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-8"></div>
-          
-          {/* Copyright */}
-          <div className="text-sm text-gray-400 mb-5 text-center">
-            © 2025 Chris Abra. All rights reserved.
+
+          {/* Need Leadership - Right Column */}
+          <div className="flex flex-col justify-between">
+            <div className="space-y-6">
+              <h2 className="text-white text-4xl md:text-5xl font-bold leading-tight">
+                NEED KIND<br />LEADERSHIP?
+              </h2>
+
+              <div className="space-y-3">
+                <p className="text-white text-lg font-medium">Find me elsewhere in the internet</p>
+                <div className="flex flex-wrap gap-4">
+                  <a href="#" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                    <AiOutlineLinkedin className="mr-1" /> LinkedIn
+                  </a>
+                  <a href="#" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                    <FiTwitter className="mr-1" /> Twitter
+                  </a>
+                  <a href="#" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                    <SiSubstack className="mr-1" /> Substack
+                  </a>
+                  <a href="#" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                    <span className="mr-1">⊕</span> ADPList
+                  </a>
+                  <a href="#" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                    <FiBookOpen className="mr-1" /> Read.cv
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Logo Brand ORIOL at the bottom */}
+            <div className="mt-10 md:mt-0">
+              <div className="flex items-end">
+                {/* O */}
+                <div className="relative w-32 h-32 bg-black flex items-center justify-center border-8 border-black rounded-full">
+                  <div className="w-14 h-14 rotate-45 bg-red-500"></div>
+                </div>
+                {/* R */}
+                <div className="h-32 w-14 bg-black relative ml-2">
+                  <div className="absolute bottom-0 right-0 w-full h-1/4 bg-purple-400"></div>
+                </div>
+                {/* I */}
+                <div className="h-32 w-14 bg-black ml-2 relative">
+                  <div className="absolute top-1/2 w-full h-1/4 bg-yellow-400"></div>
+                </div>
+                {/* O */}
+                <div className="relative w-32 h-32 bg-black flex items-center justify-center border-8 border-black rounded-full ml-2">
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <div className="w-1/2 h-full bg-green-500 absolute left-0"></div>
+                  </div>
+                </div>
+                {/* L */}
+                <div className="h-32 w-14 bg-black ml-2 relative">
+                  <div className="absolute bottom-0 right-0 w-full h-1/4 bg-purple-400"></div>
+                </div>
+              </div>
+            </div>
           </div>
-          
-          {/* Land acknowledgment */}
-          <div className="text-xs text-gray-500 mb-6 text-center max-w-2xl">
-            I am grateful to live, work, and play on the unceded lands of the Songhees, Esquimalt, and W̱SÁNEĆ peoples.
-          </div>
-          
-          {/* Stripe Climate */}
-          <div className="flex items-center justify-center space-x-2 border border-gray-800 rounded-full py-2 px-4 bg-gray-900">
-            <span className="text-xs text-gray-400">Proud member of</span>
-            <a 
-              href="https://climate.stripe.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center hover:text-white transition-colors duration-200"
-            >
-              <span className="text-xs font-semibold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600">
-                Stripe Climate
-              </span>
-            </a>
-            <span role="img" aria-label="Green heart" className="text-xs">💚</span>
-          </div>
+        </div>
+
+        {/* Copyright line */}
+        <div className="mt-10 pt-6 border-t border-gray-800 text-gray-500 text-xs text-center">
+          Designed & developed with love from Barcelona
+          <span className="float-right">©2024</span>
         </div>
       </div>
     </footer>
