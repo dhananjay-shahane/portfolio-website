@@ -35,26 +35,81 @@ const ProjectsSection = () => {
           </motion.button>
         </div>
         
-        {/* Featured Project Showcase */}
-        <div className="bg-[#f7f7f7] dark:bg-[#111] rounded-2xl overflow-hidden shadow-xl mb-16">
-          <div className="relative">
-            <img 
-              src="/images/project4.png" 
-              alt="Featured Project" 
-              className="w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-              <div className="bg-white rounded-full p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
-                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                </svg>
+        {/* Featured Project Modal Mockup */}
+        <div className="bg-[#f7f7f7] dark:bg-[#111] rounded-2xl overflow-hidden shadow-xl mb-12">
+          <div className="bg-[#111] p-4 border-b border-gray-800 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="h-3 w-3 rounded-full bg-red-500"></div>
+              <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+              <div className="h-3 w-3 rounded-full bg-green-500"></div>
+            </div>
+            <div className="text-gray-400 text-xs">Share Marketing Team</div>
+            <div></div>
+          </div>
+          <div className="p-6 bg-[#111] text-white">
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <h4 className="text-lg font-medium mb-1">Invite members</h4>
+                <p className="text-gray-400 text-xs">Invite members (4)</p>
               </div>
+              <button className="text-xs text-gray-400">×</button>
+            </div>
+            
+            {/* Invite form mockup */}
+            <div className="mb-6">
+              <div className="relative mb-4">
+                <input 
+                  type="text" 
+                  placeholder="Type or paste email addresses" 
+                  className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-3 text-sm text-white"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-2 mb-4">
+                {['Owner', 'Can edit', 'Can view'].map((role, i) => (
+                  <div key={i} className="inline-flex items-center space-x-1">
+                    <div className={`h-4 w-4 rounded-full border ${i === 0 ? 'bg-blue-500 border-blue-600' : 'border-gray-600'}`}></div>
+                    <span className="text-xs text-gray-300">{role}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Member List */}
+            <div className="space-y-4">
+              {[
+                { name: 'Ray Santos', email: 'ray@example.com', color: 'bg-purple-500' },
+                { name: 'Miguel Mills', email: 'miguel@example.com', color: 'bg-red-500' },
+                { name: 'Daniel Abreu', email: 'daniel@example.com', color: 'bg-green-500' },
+                { name: 'Florence Knoll', email: 'florence@example.com', color: 'bg-blue-500' }
+              ].map((member, i) => (
+                <div key={i} className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className={`w-8 h-8 rounded-full ${member.color} flex items-center justify-center text-xs text-white`}>
+                      {member.name.split(' ').map(part => part[0]).join('')}
+                    </div>
+                    <div>
+                      <div className="text-sm text-white">{member.name}</div>
+                      <div className="text-xs text-gray-400">{member.email}</div>
+                    </div>
+                  </div>
+                  <select className="bg-gray-800 border border-gray-700 rounded text-xs p-1 text-gray-300">
+                    <option>Can edit</option>
+                    <option>Can view</option>
+                  </select>
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex justify-between mt-6 pt-4 border-t border-gray-800">
+              <button className="text-xs text-gray-400">Cancel</button>
+              <button className="bg-blue-600 text-white text-xs px-4 py-2 rounded">Share</button>
             </div>
           </div>
         </div>
         
-        {/* Project Cards */}
-        <div className="space-y-20">
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <ProjectCard
               key={index}

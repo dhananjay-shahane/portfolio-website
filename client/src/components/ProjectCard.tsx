@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { Project, ProjectFeature } from "@shared/types";
 import gsap from "gsap";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, ChevronDown, Users, Bell, Calendar, MoreHorizontal, Search } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface FeatureItemProps {
@@ -56,94 +56,169 @@ const ProjectCard = ({ project, delay = 0, isEven = false }: ProjectCardProps) =
   }, [delay]);
 
   return (
-    <motion.article 
+    <motion.div 
       ref={cardRef}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.3 }}
-      className="bg-[#111] border border-gray-800 rounded-2xl overflow-hidden shadow-xl p-0"
+      className="bg-white dark:bg-[#111] border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-lg"
     >
-      {/* Project Card Header with Image */}
-      <div className="relative">
-        <img 
-          src={project.imageUrl} 
-          alt={project.title} 
-          className="w-full h-64 object-cover"
-        />
-        <div className="absolute top-4 right-4 flex space-x-2">
-          <div className="bg-black bg-opacity-70 text-white text-xs px-3 py-1 rounded-full">
-            {new Date().getFullYear()}
+      {/* Dashboard Header */}
+      <div className="border-b border-gray-200 dark:border-gray-800 p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="h-8 w-8 bg-blue-600 rounded text-white flex items-center justify-center font-bold text-sm">E</div>
+            <h3 className="font-semibold dark:text-white">Entra Studio</h3>
+            <ChevronDown className="h-4 w-4 text-gray-500 dark:text-gray-300" />
           </div>
-          <div className="bg-green-500 bg-opacity-70 text-white text-xs px-3 py-1 rounded-full">
-            UI/UX
+          
+          <div className="flex items-center space-x-2">
+            <button className="p-1.5 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              <Bell className="h-4 w-4" />
+            </button>
+            <button className="p-1.5 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              <Users className="h-4 w-4" />
+            </button>
+            <button className="p-1.5 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+              <Calendar className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </div>
       
-      {/* Project Details */}
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{project.title}</h3>
-            <p className="text-gray-400 text-sm">Marketing Collaboration Platform</p>
-          </div>
-          
-          <div className="flex space-x-2">
-            <span className="text-gray-400 text-xs border border-gray-700 rounded-full px-2 py-1">Share</span>
-            <span className="text-gray-400 text-xs border border-gray-700 rounded-full px-2 py-1">Details</span>
-          </div>
-        </div>
-        
-        {/* Description */}
-        <p className="text-gray-300 mb-6 leading-relaxed text-sm">
-          {project.description}
-        </p>
-        
-        {/* Team Members */}
-        <div className="mt-6 border-t border-gray-800 pt-4">
-          <h4 className="text-white text-sm font-medium mb-3">Team Members</h4>
-          <div className="flex -space-x-2">
-            <div className="w-8 h-8 rounded-full bg-blue-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">JD</div>
-            <div className="w-8 h-8 rounded-full bg-green-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">MK</div>
-            <div className="w-8 h-8 rounded-full bg-purple-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">SL</div>
-            <div className="w-8 h-8 rounded-full bg-orange-500 border-2 border-[#111] flex items-center justify-center text-xs text-white">AR</div>
-            <div className="w-8 h-8 rounded-full bg-gray-700 border-2 border-[#111] flex items-center justify-center text-xs text-white">+3</div>
-          </div>
-        </div>
-        
-        {/* Actions */}
-        <div className="mt-6 flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <div className="text-gray-400 flex items-center space-x-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span className="text-xs">San Francisco</span>
-            </div>
-            <div className="text-gray-400 flex items-center space-x-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
-                <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
-              </svg>
-              <span className="text-xs">12 Tasks</span>
-            </div>
-          </div>
-          
-          {project.link && (
-            <motion.a 
-              href={project.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-xs text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Project
-            </motion.a>
-          )}
+      {/* Toolbar */}
+      <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="flex items-center space-x-2">
+          <button className="text-xs font-medium py-1.5 px-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md">
+            Home
+          </button>
+          <button className="text-xs font-medium py-1.5 px-3 text-gray-500 dark:text-gray-400 rounded-md">
+            Forms
+          </button>
+          <button className="text-xs font-medium py-1.5 px-3 text-gray-500 dark:text-gray-400 rounded-md">
+            Integrations
+          </button>
+          <button className="text-xs font-medium py-1.5 px-3 text-gray-500 dark:text-gray-400 rounded-md">
+            Brand KPI
+          </button>
         </div>
       </div>
-    </motion.article>
+      
+      {/* Main Content */}
+      <div className="p-4 border-b border-gray-200 dark:border-gray-800">
+        <div className="flex justify-between items-center mb-4">
+          <h4 className="text-sm font-semibold dark:text-white">Marketing Team</h4>
+          <button className="p-1.5 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800">
+            <MoreHorizontal className="h-4 w-4" />
+          </button>
+        </div>
+        
+        <div className="relative flex items-center mb-4">
+          <Search className="h-4 w-4 absolute left-3 text-gray-400" />
+          <input 
+            type="text" 
+            placeholder="Search" 
+            className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-md text-gray-800 dark:text-gray-200"
+          />
+        </div>
+        
+        <div className="grid grid-cols-5 gap-2 text-xs text-gray-500 dark:text-gray-400 font-medium border-b border-gray-200 dark:border-gray-800 pb-2">
+          <div>Title</div>
+          <div>Owner</div>
+          <div>Status</div>
+          <div>Due date</div>
+          <div>Categories</div>
+        </div>
+      </div>
+      
+      {/* Member List */}
+      <div className="max-h-72 overflow-y-auto">
+        {/* Member Row 1 */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center text-xs">
+          <div className="w-1/5">
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+                <span className="text-red-600 text-xs">M</span>
+              </div>
+              <span className="dark:text-white">Marketing Campaign</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <div className="flex items-center space-x-1">
+              <div className="w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center text-[10px] text-white">RS</div>
+              <span className="dark:text-gray-300">Ray Santos (You)</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <span className="px-2 py-1 rounded-full bg-green-100 text-green-800 text-[10px]">25%</span>
+          </div>
+          <div className="w-1/5 dark:text-gray-300">23 Aug 2023</div>
+          <div className="w-1/5 flex items-center space-x-1">
+            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+            <div className="w-2 h-2 rounded-full bg-pink-500"></div>
+          </div>
+        </div>
+        
+        {/* Member Row 2 */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center text-xs">
+          <div className="w-1/5">
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
+                <span className="text-blue-600 text-xs">W</span>
+              </div>
+              <span className="dark:text-white">Website Redesign</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <div className="flex items-center space-x-1">
+              <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center text-[10px] text-white">JP</div>
+              <span className="dark:text-gray-300">Jean Proust</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <span className="px-2 py-1 rounded-full bg-yellow-100 text-yellow-800 text-[10px]">50%</span>
+          </div>
+          <div className="w-1/5 dark:text-gray-300">11 Aug 2023</div>
+          <div className="w-1/5 flex items-center space-x-1">
+            <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+          </div>
+        </div>
+        
+        {/* Member Row 3 */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center text-xs">
+          <div className="w-1/5">
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <span className="text-green-600 text-xs">S</span>
+              </div>
+              <span className="dark:text-white">Social Media Plan</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <div className="flex items-center space-x-1">
+              <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-[10px] text-white">DA</div>
+              <span className="dark:text-gray-300">Daniel Adler</span>
+            </div>
+          </div>
+          <div className="w-1/5">
+            <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px]">30%</span>
+          </div>
+          <div className="w-1/5 dark:text-gray-300">9 Aug 2023</div>
+          <div className="w-1/5 flex items-center space-x-1">
+            <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Footer */}
+      <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex justify-center">
+        <button className="text-xs text-gray-500 dark:text-gray-400 hover:underline">
+          View all tasks
+        </button>
+      </div>
+    </motion.div>
   );
 };
 
