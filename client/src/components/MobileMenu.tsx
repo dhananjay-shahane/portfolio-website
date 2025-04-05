@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Linkedin, Github, Mail, Home } from "lucide-react";
+import { Instagram, Linkedin, Github, Mail } from "lucide-react";
 import { setupOffcanvasMenu } from "@/lib/animations";
-import { useLocation } from "wouter";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -14,8 +13,6 @@ interface MobileMenuProps {
 const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const menuItemsRef = useRef<HTMLDivElement>(null);
-  const [location] = useLocation();
-  const isHomePage = location === "/";
 
   useEffect(() => {
     // Prevent body scroll when menu is open
@@ -63,110 +60,46 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
             <div ref={menuItemsRef} className="container max-w-6xl mx-auto px-6 py-20 relative">
               {/* Menu items */}
               <div className="flex flex-col items-center md:items-start space-y-8 text-center md:text-left">
-                {/* Home link - only show if not on home page */}
-                {!isHomePage && (
-                  <a 
-                    href="/"
-                    className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onNavItemClick("/");
-                    }}
-                  >
-                    Home
-                  </a>
-                )}
-                
-                {/* Conditional navigation - show either page links or section links */}
-                {isHomePage ? (
-                  // Section links when on home page
-                  <>
-                    <a 
-                      href="#about" 
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("about");
-                      }}
-                    >
-                      About
-                    </a>
-                    <a 
-                      href="#skills" 
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("skills");
-                      }}
-                    >
-                      Skills
-                    </a>
-                    <a 
-                      href="#projects" 
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("projects");
-                      }}
-                    >
-                      Projects
-                    </a>
-                    <a 
-                      href="#contact" 
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("contact");
-                      }}
-                    >
-                      Contact
-                    </a>
-                  </>
-                ) : (
-                  // Page links when not on home page
-                  <>
-                    <a 
-                      href="/about"
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("/about");
-                      }}
-                    >
-                      About
-                    </a>
-                    <a 
-                      href="/projects"
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("/projects");
-                      }}
-                    >
-                      Projects
-                    </a>
-                    <a 
-                      href="/blog"
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("/blog");
-                      }}
-                    >
-                      Blog
-                    </a>
-                    <a 
-                      href="/contact"
-                      className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onNavItemClick("/contact");
-                      }}
-                    >
-                      Contact
-                    </a>
-                  </>
-                )}
+                <a 
+                  href="#about" 
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavItemClick("about");
+                  }}
+                >
+                  About
+                </a>
+                <a 
+                  href="#skills" 
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavItemClick("skills");
+                  }}
+                >
+                  Skills
+                </a>
+                <a 
+                  href="#projects" 
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavItemClick("projects");
+                  }}
+                >
+                  Projects
+                </a>
+                <a 
+                  href="#contact" 
+                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavItemClick("contact");
+                  }}
+                >
+                  Contact
+                </a>
                 
                 {/* Social links */}
                 <div className="flex flex-wrap justify-center md:justify-start space-x-5 pt-10 mt-6 border-t border-gray-800 w-full">

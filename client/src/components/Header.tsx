@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { useLocation, Link } from "wouter";
+import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileMenu from "./MobileMenu";
 import { animateHeader } from "@/lib/animations";
@@ -10,8 +10,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
-  const [location, setLocation] = useLocation();
-  const isHomePage = location === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,40 +36,16 @@ const Header = () => {
   };
 
   const scrollToSection = (sectionId: string) => {
-    // If we're not on the home page, navigate home first
-    if (!isHomePage) {
-      setLocation("/");
-      // Wait for navigation to complete before scrolling
-      setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        const headerHeight = document.querySelector("header")?.offsetHeight || 0;
-        
-        if (section) {
-          const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth",
-          });
-        }
-      }, 100);
-    } else {
-      // We're already on the home page, just scroll
-      const section = document.getElementById(sectionId);
-      const headerHeight = document.querySelector("header")?.offsetHeight || 0;
-      
-      if (section) {
-        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-      }
+    const section = document.getElementById(sectionId);
+    const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+    
+    if (section) {
+      const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
     }
-  };
-
-  const navigateTo = (path: string) => {
-    setLocation(path);
-    setIsMenuOpen(false);
   };
 
   return (
@@ -84,36 +58,21 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 md:px-6 max-w-6xl flex justify-between items-center">
           {/* Logo */}
-          <Link href="/">
-            <a className="flex items-center space-x-2 z-50 relative">
-              <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                <span className="text-xl font-bold text-white">CA</span>
-              </div>
-              <span className="font-semibold text-white text-lg">Chris Abra</span>
-            </a>
-          </Link>
+          <a href="#" className="flex items-center space-x-2 z-50 relative" onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}>
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+              <span className="text-xl font-bold text-white">CA</span>
+            </div>
+            <span className="font-semibold text-white text-lg">Chris Abra</span>
+          </a>
 
-          {/* Desktop Navigation - only visible on larger screens */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/about">
-              <a className="text-white hover:text-indigo-400 transition-colors">About</a>
-            </Link>
-            <Link href="/projects">
-              <a className="text-white hover:text-indigo-400 transition-colors">Projects</a>
-            </Link>
-            <Link href="/blog">
-              <a className="text-white hover:text-indigo-400 transition-colors">Blog</a>
-            </Link>
-            <Link href="/contact">
-              <a className="text-white hover:text-indigo-400 transition-colors">Contact</a>
-            </Link>
-          </div>
-
-          {/* Menu Button - Always visible on mobile */}
+          {/* Menu Button - Always visible regardless of device */}
           <Button 
             variant="ghost" 
             size="icon" 
-            className="text-white z-50 relative md:hidden"
+            className="text-white z-50 relative"
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
@@ -131,12 +90,8 @@ const Header = () => {
         isOpen={isMenuOpen} 
         onClose={() => setIsMenuOpen(false)} 
         onNavItemClick={(sectionId) => {
-          if (sectionId.startsWith("/")) {
-            navigateTo(sectionId);
-          } else {
-            scrollToSection(sectionId);
-            setIsMenuOpen(false);
-          }
+          scrollToSection(sectionId);
+          setIsMenuOpen(false);
         }}
       />
     </>
