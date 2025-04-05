@@ -1,15 +1,27 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, forwardRef, ForwardedRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MobileMenu from "./MobileMenu";
 import { animateHeader } from "@/lib/animations";
 
-const Header = () => {
+const Header = forwardRef<HTMLElement, {}>((props, ref) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
+  const innerHeaderRef = useRef<HTMLElement>(null);
   const isMobile = useIsMobile();
+  
+  // Combine refs (external and internal)
+  const headerRef = (node: HTMLElement) => {
+    if (typeof ref === 'function') {
+      ref(node);
+    } else if (ref) {
+      ref.current = node;
+    }
+    
+    // @ts-ignore - This is safe because we're just assigning the node
+    innerHeaderRef.current = node;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,14 +34,14 @@ const Header = () => {
     };
   }, []);
 
-  // Initialize header animation on mount
-  useEffect(() => {
-    const header = headerRef.current;
-    if (header) {
-      // Use our animation utility for header entrance
-      animateHeader(header);
-    }
-  }, []);
+  // We don't need this effect anymore since the App component will handle it
+  // useEffect(() => {
+  //   const header = innerHeaderRef.current;
+  //   if (header) {
+  //     // Use our animation utility for header entrance
+  //     animateHeader(header);
+  //   }
+  // }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -96,6 +108,8 @@ const Header = () => {
       />
     </>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;

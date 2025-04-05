@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { queryClient } from "./lib/queryClient";
@@ -13,15 +13,29 @@ import {
   setupScrollTriggers, 
   setupSmoothScroll, 
   setupCustomSmoothScroll,
-  setupParallaxEffects
+  setupParallaxEffects,
+  animateHeader
 } from "./lib/animations";
 import { gsapInit } from "./lib/gsap";
 
+// Import ScrollTrigger to access it directly
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import ScrollToPlugin from "gsap/ScrollToPlugin";
+
+// Register plugins globally
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+}
+
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
+  // Initialize GSAP and animations
   useEffect(() => {
-    // Initialize GSAP
+    // Initialize GSAP libraries
     gsapInit();
     
     // Setup scroll triggers and animations once the app is mounted
@@ -29,12 +43,64 @@ function App() {
       // Small timeout to ensure DOM is fully rendered
       let cleanupFunction: (() => void) | undefined;
       
+      // Show content with fade-in
+      gsap.to(appRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        onComplete: () => setIsLoaded(true)
+      });
+      
       const timeoutId = setTimeout(() => {
+        // Animate header entrance
+        if (headerRef.current) {
+          animateHeader(headerRef.current);
+        }
+        
         // Initialize all scroll and parallax animations
         setupScrollTriggers();
         setupSmoothScroll();
         setupParallaxEffects();
         cleanupFunction = setupCustomSmoothScroll();
+        
+        // Add scroll-based animations for section transitions
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section, index) => {
+          const nextSection = sections[index + 1];
+          if (nextSection) {
+            ScrollTrigger.create({
+              trigger: section,
+              start: "bottom bottom",
+              onEnter: () => {
+                gsap.to(window, {
+                  duration: 0.5,
+                  scrollTo: {
+                    y: nextSection,
+                    offsetY: 80
+                  },
+                  ease: "power2.inOut"
+                });
+              },
+              once: true
+            });
+          }
+        });
+        
+        // Add a progress indicator for scroll position
+        const progressBar = document.createElement('div');
+        progressBar.className = 'fixed top-0 left-0 h-1 bg-indigo-600 z-50';
+        document.body.appendChild(progressBar);
+        
+        gsap.to(progressBar, {
+          width: '100%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.documentElement,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 0.3
+          }
+        });
+        
       }, 100);
       
       return () => {
@@ -43,6 +109,16 @@ function App() {
         if (cleanupFunction) {
           cleanupFunction();
         }
+        
+        // Clean up ScrollTrigger instances
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        
+        // Remove progress bar
+        const progressBar = document.querySelector('.progress-bar');
+        if (progressBar) {
+          progressBar.remove();
+        }
+        
         // Reset scroll position
         window.scrollTo(0, 0);
       };
@@ -56,7 +132,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div ref={appRef} className="min-h-screen bg-background text-white overflow-x-hidden">
+      <div 
+        ref={appRef} 
+        className="min-h-screen bg-background text-white overflow-x-hidden opacity-0 transition-opacity"
+      >
         <Header />
         <main>
           <HeroSection />

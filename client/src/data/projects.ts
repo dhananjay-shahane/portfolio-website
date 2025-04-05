@@ -2,138 +2,178 @@ import { Project } from "@shared/types";
 
 export const projects: Project[] = [
   {
-    title: "Impact Volleyball Training",
+    title: "Entra Studio",
     tags: [
-      { name: "Webflow Development", bgColor: "bg-blue-400", textColor: "text-blue-900" },
-      { name: "Memberstack", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
-      { name: "Airtable", bgColor: "bg-pink-400", textColor: "text-pink-900" }
+      { name: "UI/UX", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "React", bgColor: "bg-blue-600", textColor: "text-white" },
+      { name: "TypeScript", bgColor: "bg-blue-600", textColor: "text-white" }
     ],
-    description: "I built Impact Volleyball's online home and platform, which allows volleyball athletes and enthusiasts to register for their online physical training programs, along with the promotion of their upcoming events and camps.",
+    description: "Collaborative marketing team platform that streamlines project management and enhances team productivity through intuitive workflows and real-time updates.",
     imageUrl: "/images/project1.png",
     features: [
       {
-        title: "Memberstack Integration",
-        description: "Impact Volleyball's online training platform is built using Memberstack, allowing athletes to register online and view the individual programs on a mobile-friendly web-based platform.",
+        title: "Team Collaboration",
+        description: "Real-time collaboration features allow team members to work together seamlessly on marketing campaigns and projects.",
         color: "blue"
       },
       {
-        title: "Webflow CMS-Driven Programs",
-        description: "The programs are created and updated using an easy-to-use Webflow CMS structure that allows the Impact Volleyball team to quickly build out new programs.",
+        title: "Task Management",
+        description: "Intuitive task tracking system with progress indicators, due dates, and priority settings to keep projects on schedule.",
         color: "yellow"
       }
     ]
   },
   {
-    title: "Apparel Decoration Production Management",
+    title: "Pulse Analytics",
     tags: [
-      { name: "Airtable", bgColor: "bg-blue-400", textColor: "text-blue-900" },
-      { name: "SendGrid", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
-      { name: "Twilio", bgColor: "bg-purple-400", textColor: "text-purple-900" },
-      { name: "Slack", bgColor: "bg-red-400", textColor: "text-red-900" },
-      { name: "Google Drive", bgColor: "bg-blue-500", textColor: "text-white" },
-      { name: "Zapier", bgColor: "bg-orange-400", textColor: "text-orange-900" }
+      { name: "Dashboard", bgColor: "bg-purple-400", textColor: "text-purple-900" },
+      { name: "Data Viz", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
+      { name: "React", bgColor: "bg-blue-600", textColor: "text-white" }
     ],
-    description: "Due to a lack of available software options that were sufficient for our needs, I built a custom order management system for Passion Sports. The initial version launched as a basic Airtable system with simple Slack integrations in April 2017. I completely rebuilt the system from scratch in February 2019 to incorporate much more advanced Zapier integrations and provide more automations for the team.",
+    description: "Marketing analytics platform that provides real-time insights into campaign performance, audience engagement, and conversion metrics with customizable dashboards.",
     imageUrl: "/images/project2.png",
     features: [
       {
-        title: "Airtable Production Base",
-        description: "The entire system is based around an Airtable base that houses every order's production requirements, artwork files, due dates, product statuses and order artwork proofs.",
+        title: "Real-time Analytics",
+        description: "Live data processing and visualization for immediate insights into marketing campaign performance and audience engagement.",
         color: "blue"
       },
       {
-        title: "Internal Team Notification System",
-        description: "At various stages in the order process, Slack notifications are sent to individuals and channels to keep everyone on the same page with any potential delays or bottlenecks.",
+        title: "Custom Reporting",
+        description: "Flexible report generation tools allow teams to create and share tailored reports with stakeholders and clients.",
         color: "yellow"
-      },
-      {
-        title: "Custom Shipment Notification System",
-        description: "Upon order shipment, the system is designed to create proper tracking URLs for all of the carriers that we use (Canada Post, DHL, UPS, Fedex, and local couriers). From these URLs, a custom shipment tracking email is sent to the customer's rep (via SendGrid), the tracking URL is posted to the order's thread in Slack, and text notifications are sent to the rep.",
-        color: "pink"
       }
     ]
   },
   {
-    title: "PulpCulture",
+    title: "Socio Connect",
     tags: [
-      { name: "Web Design", bgColor: "bg-blue-400", textColor: "text-blue-900" },
-      { name: "Vinoshipper", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
-      { name: "Webflow Development", bgColor: "bg-pink-400", textColor: "text-pink-900" },
-      { name: "Spline 3D", bgColor: "bg-orange-400", textColor: "text-orange-900" }
+      { name: "Social Media", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "Analytics", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
+      { name: "Scheduling", bgColor: "bg-pink-400", textColor: "text-pink-900" }
     ],
-    description: "One of my favourite companies to work with and a project that really pushed myself into a couple of new spaces (Spline 3D and custom ecommerce integrations), the PulpCulture website was a great challenge for me.",
+    description: "Comprehensive social media management tool that enables marketing teams to schedule posts, monitor engagement, and analyze performance across multiple platforms.",
     imageUrl: "/images/project3.png",
     features: [
       {
-        title: "Ecommerce Integration",
-        description: "Integrated each product page with their custom alcohol beverage e-commerce integration, Vinoshipper, this allows their marketing team to quickly add products to their website and handle checkouts through their preferred platform.",
+        title: "Multi-platform Management",
+        description: "Unified interface for managing content across different social media platforms, ensuring consistent brand messaging.",
         color: "blue"
       },
       {
-        title: "Spline 3D Models",
-        description: "Created 3D models of each of the cans from PulpCulture's main product line to be integrated into the website.",
+        title: "Content Calendar",
+        description: "Visual planning tool for scheduling and organizing social media posts with team collaboration features.",
         color: "yellow"
-      },
-      {
-        title: "Custom Landing Page System",
-        description: "More recently, we've added a custom landing page system for their marketing team to quickly roll out landing pages for new campaigns and products.",
-        color: "pink"
       }
     ]
   },
   {
     title: "Fintech Dashboard",
     tags: [
-      { name: "React", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "Financial", bgColor: "bg-green-400", textColor: "text-green-900" },
       { name: "TypeScript", bgColor: "bg-blue-600", textColor: "text-white" },
-      { name: "Chart.js", bgColor: "bg-green-400", textColor: "text-green-900" },
-      { name: "TailwindCSS", bgColor: "bg-teal-400", textColor: "text-teal-900" }
+      { name: "Chart.js", bgColor: "bg-green-400", textColor: "text-green-900" }
     ],
-    description: "An advanced financial dashboard allowing users to track investments, monitor market trends, and manage their portfolio all in one place. The project required complex data visualization and real-time updates.",
+    description: "Advanced financial analytics dashboard for monitoring investments, market trends, and portfolio performance with real-time data visualization and custom alerts.",
     imageUrl: "/images/project4.png",
     features: [
       {
-        title: "Real-time Data Visualization",
-        description: "Implemented interactive charts and graphs using Chart.js to display complex financial data in an intuitive and user-friendly way.",
+        title: "Investment Tracking",
+        description: "Comprehensive portfolio monitoring with performance metrics, risk analysis, and historical trend visualization.",
         color: "blue"
       },
       {
-        title: "Portfolio Management",
-        description: "Created a comprehensive system for users to track and manage their investment portfolio with real-time updates and historical performance analysis.",
+        title: "Market Analysis",
+        description: "Real-time market data integration with technical indicators and pattern recognition to support investment decisions.",
         color: "yellow"
-      },
-      {
-        title: "Market Analysis Tools",
-        description: "Developed advanced tools for technical analysis, including moving averages, RSI indicators, and custom alert systems for price movements.",
-        color: "pink"
       }
     ]
   },
   {
-    title: "E-Learning Platform",
+    title: "Team Sync",
     tags: [
-      { name: "Next.js", bgColor: "bg-black", textColor: "text-white" },
-      { name: "Firebase", bgColor: "bg-yellow-500", textColor: "text-white" },
-      { name: "Stripe", bgColor: "bg-purple-500", textColor: "text-white" },
-      { name: "Framer Motion", bgColor: "bg-pink-500", textColor: "text-white" }
+      { name: "Collaboration", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "Project Management", bgColor: "bg-yellow-400", textColor: "text-yellow-900" },
+      { name: "React", bgColor: "bg-blue-600", textColor: "text-white" }
     ],
-    description: "A comprehensive online learning platform with course creation tools, student progress tracking, and integrated payment processing for instructors to monetize their educational content.",
+    description: "Team coordination platform designed specifically for remote and distributed marketing teams, featuring real-time communication, task management, and resource sharing.",
     imageUrl: "/images/project5.png",
     features: [
       {
-        title: "Interactive Course Builder",
-        description: "Created an intuitive drag-and-drop interface for instructors to design courses with videos, quizzes, and assignments without requiring technical knowledge.",
+        title: "Virtual Workspace",
+        description: "Integrated environment for team collaboration with video conferencing, shared documents, and project management tools.",
         color: "blue"
       },
       {
-        title: "Student Analytics Dashboard",
-        description: "Developed detailed analytics for both students and instructors to track progress, identify learning patterns, and optimize the educational experience.",
+        title: "Resource Allocation",
+        description: "Smart scheduling and workload balancing to optimize team productivity and prevent burnout.",
         color: "yellow"
+      }
+    ]
+  },
+  {
+    title: "Content Studio",
+    tags: [
+      { name: "Content Creation", bgColor: "bg-purple-400", textColor: "text-purple-900" },
+      { name: "AI Tools", bgColor: "bg-blue-500", textColor: "text-white" },
+      { name: "Collaboration", bgColor: "bg-green-400", textColor: "text-green-900" }
+    ],
+    description: "Creative content production platform that combines AI-powered content suggestions, collaborative editing tools, and brand asset management for marketing teams.",
+    imageUrl: "/images/project1.png",
+    features: [
+      {
+        title: "AI Content Assistant",
+        description: "Smart writing tools that provide suggestions, improve readability, and ensure brand voice consistency across all content.",
+        color: "blue"
       },
       {
-        title: "Seamless Payment Integration",
-        description: "Implemented Stripe for handling course purchases, subscription plans, and revenue sharing between the platform and instructors.",
-        color: "pink"
+        title: "Brand Asset Library",
+        description: "Centralized repository for managing and accessing brand elements, images, and templates with version control.",
+        color: "yellow"
+      }
+    ]
+  },
+  {
+    title: "Campaign Manager",
+    tags: [
+      { name: "Marketing", bgColor: "bg-red-400", textColor: "text-red-900" },
+      { name: "Automation", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "Analytics", bgColor: "bg-yellow-400", textColor: "text-yellow-900" }
+    ],
+    description: "End-to-end marketing campaign management solution that streamlines planning, execution, and analysis with automated workflows and performance tracking.",
+    imageUrl: "/images/project2.png",
+    features: [
+      {
+        title: "Campaign Workflow",
+        description: "Structured process management from ideation to execution with approval systems and milestone tracking.",
+        color: "blue"
+      },
+      {
+        title: "Performance Tracking",
+        description: "Comprehensive analytics dashboard showing campaign ROI, conversion metrics, and audience engagement data.",
+        color: "yellow"
+      }
+    ]
+  },
+  {
+    title: "Customer Insights",
+    tags: [
+      { name: "CRM", bgColor: "bg-blue-400", textColor: "text-blue-900" },
+      { name: "Data Analysis", bgColor: "bg-green-400", textColor: "text-green-900" },
+      { name: "Reporting", bgColor: "bg-purple-400", textColor: "text-purple-900" }
+    ],
+    description: "Customer relationship management platform enhanced with advanced analytics and segmentation tools to provide actionable insights for targeted marketing strategies.",
+    imageUrl: "/images/project3.png",
+    features: [
+      {
+        title: "Customer Segmentation",
+        description: "AI-powered audience clustering based on behavior patterns, preferences, and engagement history for personalized marketing.",
+        color: "blue"
+      },
+      {
+        title: "Journey Mapping",
+        description: "Visual customer journey analytics that identify touchpoints, conversion paths, and optimization opportunities.",
+        color: "yellow"
       }
     ]
   }

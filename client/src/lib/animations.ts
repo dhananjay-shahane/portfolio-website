@@ -207,10 +207,29 @@ export const setupScrollTriggers = () => {
   });
 };
 
-// Custom smooth scrolling effect without ScrollSmoother
+// Enhanced smooth scrolling effect with GSAP
 export const setupCustomSmoothScroll = () => {
   // Use standard scroll behavior for smooth scrolling
   document.documentElement.style.scrollBehavior = 'smooth';
+  
+  // Create a wrapper function for smooth scrolling
+  const smoothScrollTo = (target: HTMLElement, duration = 1) => {
+    const startPosition = window.scrollY;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const distance = targetPosition - startPosition;
+    
+    gsap.to(window, {
+      scrollTo: {
+        y: targetPosition,
+        autoKill: false
+      },
+      duration: duration,
+      ease: "power3.out",
+      onComplete: () => {
+        // Callback when scroll completes
+      }
+    });
+  };
   
   // Set up smooth scroll for anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -221,11 +240,59 @@ export const setupCustomSmoothScroll = () => {
       if (targetId) {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
+          smoothScrollTo(targetElement);
         }
       }
     });
   });
+  
+  // Setup advanced parallax effect for project cards
+  const setupProjectCardsParallax = () => {
+    const projectsSection = document.getElementById('projects');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (!projectsSection || !projectCards.length) return;
+    
+    // Track mouse position for hover effect
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Update mouse position
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Apply subtle mouse-based parallax to cards if they're visible
+      projectCards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        
+        // Check if card is in viewport
+        if (
+          rect.bottom > 0 &&
+          rect.top < window.innerHeight &&
+          rect.right > 0 &&
+          rect.left < window.innerWidth
+        ) {
+          // Calculate distance from mouse to center of card
+          const cardCenterX = rect.left + rect.width / 2;
+          const cardCenterY = rect.top + rect.height / 2;
+          
+          // Calculate movement based on distance (max 15px movement)
+          const moveX = (mouseX - cardCenterX) / 50;
+          const moveY = (mouseY - cardCenterY) / 50;
+          
+          // Apply subtle movement
+          gsap.to(card, {
+            x: moveX * 0.5,
+            y: moveY * 0.5,
+            duration: 1,
+            ease: "power2.out",
+            overwrite: "auto"
+          });
+        }
+      });
+    });
+  };
   
   // Add scroll listener for parallax effects
   const parallaxScroll = () => {
@@ -238,22 +305,48 @@ export const setupCustomSmoothScroll = () => {
       const offset = scrollTop * speed;
       
       if (direction === "down") {
-        (el as HTMLElement).style.transform = `translateY(${offset}px)`;
+        gsap.to(el, { 
+          y: offset, 
+          duration: 0.5, 
+          ease: "none", 
+          overwrite: "auto" 
+        });
       } else if (direction === "up") {
-        (el as HTMLElement).style.transform = `translateY(-${offset}px)`;
+        gsap.to(el, { 
+          y: -offset, 
+          duration: 0.5, 
+          ease: "none", 
+          overwrite: "auto" 
+        });
+      } else if (direction === "left") {
+        gsap.to(el, { 
+          x: -offset, 
+          duration: 0.5, 
+          ease: "none", 
+          overwrite: "auto" 
+        });
+      } else if (direction === "right") {
+        gsap.to(el, { 
+          x: offset, 
+          duration: 0.5, 
+          ease: "none", 
+          overwrite: "auto" 
+        });
       }
     });
   };
   
-  // Initialize parallax effect
+  // Initialize parallax effects
   parallaxScroll();
+  setupProjectCardsParallax();
   
-  // Add event listener
+  // Add scroll event listener
   window.addEventListener('scroll', parallaxScroll);
   
   // Return cleanup function
   return () => {
     window.removeEventListener('scroll', parallaxScroll);
+    window.removeEventListener('mousemove', () => {});
     document.documentElement.style.scrollBehavior = '';
     
     // Remove click event listeners from anchor links
