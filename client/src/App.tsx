@@ -69,17 +69,6 @@ function App() {
           if (nextSection) {
             ScrollTrigger.create({
               trigger: section,
-              start: "bottom bottom",
-              onEnter: () => {
-                gsap.to(window, {
-                  duration: 0.5,
-                  scrollTo: {
-                    y: nextSection,
-                    offsetY: 80
-                  },
-                  ease: "power2.inOut"
-                });
-              },
               once: true
             });
           }
@@ -111,7 +100,7 @@ function App() {
         }
         
         // Clean up ScrollTrigger instances
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         
         // Remove progress bar
         const progressBar = document.querySelector('.progress-bar');
@@ -120,14 +109,10 @@ function App() {
         }
         
         // Reset scroll position
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
       };
     }
     
-    return () => {
-      // Cleanup any animations on unmount
-      window.scrollTo(0, 0);
-    };
   }, []);
 
   return (

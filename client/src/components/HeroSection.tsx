@@ -97,9 +97,6 @@ const HeroSection = () => {
     gsap.to(imageRef.current, {
       y: "-8px",
       duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
     });
     
     // Create a subtle scale animation for the text layer
@@ -157,32 +154,11 @@ const HeroSection = () => {
       </div>
       
       {/* Central content */}
-      <div className="container relative z-20 px-4 max-w-6xl mx-auto">
+      <div className="container z-20 px-4 max-w-6xl mx-auto">
         <div className="flex flex-col items-center">
-          {/* Character image */}
-          <motion.div 
-            className="relative mb-6"
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <picture>
-              <source srcSet="/images/chris-avatar.avif" type="image/avif" />
-              <source srcSet="/images/chris-avatar.webp" type="image/webp" />
-              <img 
-                ref={imageRef}
-                src="/images/chris-avatar.webp"
-                alt="Chris Abra" 
-                className="w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 object-cover rounded-full border-4 border-indigo-500 shadow-xl shadow-indigo-500/20 relative z-10"
-                data-parallax="true"
-                data-direction="down"
-                data-speed="0.1"
-              />
-            </picture>
-          </motion.div>
           
           {/* Central text */}
-          <div ref={centralTextRef} className="text-center">
+          <div className="text-center">
             <h1 className="font-extrabold text-white text-3xl md:text-5xl lg:text-6xl mb-3">
               <span className="text-white">WEBFLOW</span>
               <span className="text-orange-500"> DEVELOPER.</span>
@@ -200,6 +176,22 @@ const HeroSection = () => {
               <span className="text-white"> GENERALIST.</span>
             </h4>
           </div>
+
+          {/* Central text */}
+          <motion.div 
+            className="absolute bottom-0"
+          >
+            <picture>
+              <source srcSet="https://cdn.prod.website-files.com/63957415c9d3c7c02d068332/67e59106600b2658f5ba6de5_Chris.avif" type="image/avif" />
+              <source srcSet="https://cdn.prod.website-files.com/63957415c9d3c7c02d068332/67e59106600b2658f5ba6de5_Chris.avif" type="image/webp" />
+              <img 
+                ref={imageRef}
+                src="https://cdn.prod.website-files.com/63957415c9d3c7c02d068332/67e59106600b2658f5ba6de5_Chris.avif"
+                alt="Chris Abra" 
+                className="w-90 h-100 max-h-[460px]"
+              />
+            </picture>
+          </motion.div>
         </div>
       </div>
       

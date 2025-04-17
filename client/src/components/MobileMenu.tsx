@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Linkedin, Github, Mail } from "lucide-react";
+import { Instagram, Linkedin, Github, Mail, X } from "lucide-react";
 import { setupOffcanvasMenu } from "@/lib/animations";
 
 interface MobileMenuProps {
@@ -38,6 +37,19 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
     }
   }, [isOpen]);
 
+  // Handler for menu item clicks
+  const handleNavItemClick = (sectionId: string) => {
+    onNavItemClick(sectionId);
+  };
+
+  // Handle close button click
+  const handleClose = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Close button clicked");
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,7 +61,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-black/80 backdrop-blur-md z-40"
-            onClick={onClose}
+            onClick={handleClose}
           />
           
           {/* Offcanvas Menu */}
@@ -57,6 +69,17 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
             ref={menuRef}
             className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
           >
+
+            {/* Explicit Close Button */}
+            <button
+              onClick={handleClose}
+              className="absolute top-6 right-6 z-60 p-3 rounded-full bg-gray-800/70 hover:bg-gray-700 text-white focus:outline-none"
+              aria-label="Close menu"
+              type="button"
+            >
+              <X size={24} />
+            </button>
+            
             <div ref={menuItemsRef} className="container max-w-6xl mx-auto px-6 py-20 relative">
               {/* Menu items */}
               <div className="flex flex-col items-center md:items-start space-y-8 text-center md:text-left">
@@ -65,7 +88,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                   className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
-                    onNavItemClick("about");
+                    handleNavItemClick("about");
                   }}
                 >
                   About
@@ -75,7 +98,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                   className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
-                    onNavItemClick("skills");
+                    handleNavItemClick("skills");
                   }}
                 >
                   Skills
@@ -85,7 +108,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                   className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
-                    onNavItemClick("projects");
+                    handleNavItemClick("projects");
                   }}
                 >
                   Projects
@@ -95,7 +118,7 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                   className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {
                     e.preventDefault();
-                    onNavItemClick("contact");
+                    handleNavItemClick("contact");
                   }}
                 >
                   Contact

@@ -13,10 +13,10 @@ const SkillsSection = () => {
     <section 
       id="skills" 
       ref={sectionRef}
-      className="py-20 bg-gray-900 gsap-reveal"
+      className="py-10"
     >
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 max-w-7xl mx-auto">
           {currentSkills.map((skill, index) => (
             <SkillPill 
               key={index} 
@@ -27,7 +27,7 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        <div className="mt-16 max-w-3xl mx-auto text-center gsap-reveal">
+        <div className="mt-16 max-w-5xl mx-auto text-center gsap-reveal">
           <p className="text-xl text-gray-300 mb-8">
             In addition to my existing skills/knowledge, I am currently focusing 
             on expanding my expertise in the following areas and tools:

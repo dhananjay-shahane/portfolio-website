@@ -44,7 +44,7 @@ const ContactSection = () => {
       ref={sectionRef}
       className="py-20 bg-black gsap-reveal"
     >
-      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-10">
           {/* Left side - Form */}
           <div>
@@ -110,13 +110,13 @@ const ContactSection = () => {
           
           {/* Right side - Avatar Image */}
           <div className="hidden lg:block">
-            <div className="w-full h-full rounded-lg overflow-hidden">
+            <div className="w-full h-full rounded-lg overflow-hidden relative">
               <div className="w-full h-full bg-gradient-to-br from-pink-400 via-orange-500 to-yellow-300 p-8 flex items-center justify-center">
-                <div className="w-full h-full flex items-end justify-center overflow-hidden">
+                <div className="w-full h-full flex items-end justify-center overflow-hidden absolute">
                   <img
-                    src="https://storage.googleapis.com/replit/images/1688863994772_2b2d9c2b75825a15cbfa697c62c48847.png"
+                    src="https://cdn.prod.website-files.com/63957415c9d3c7c02d068332/67e59106600b2658f5ba6de5_Chris.avif"
                     alt="Avatar waving"
-                    className="max-w-[280px] max-h-[350px] object-contain"
+                    className="max-w-[680px] max-h-[450px] object-contain"
                   />
                 </div>
               </div>
