@@ -1,6 +1,6 @@
 import { Project } from "@shared/types";
 
-export const projects: Project[] = [
+export const project: Project[] = [
   {
     title: "Entra Studio",
     tags: [

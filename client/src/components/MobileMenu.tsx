@@ -94,16 +94,6 @@ const MobileMenu = ({ isOpen, onClose, onNavItemClick }: MobileMenuProps) => {
                   About
                 </a>
                 <a 
-                  href="#skills" 
-                  className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavItemClick("skills");
-                  }}
-                >
-                  Skills
-                </a>
-                <a 
                   href="#projects" 
                   className="menu-item text-white hover:text-indigo-400 transition-colors text-4xl md:text-6xl font-bold"
                   onClick={(e) => {

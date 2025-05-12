@@ -4,12 +4,8 @@ import { motion } from "framer-motion";
 
 // Create an array of roles with different colors - MORE TEXT FOR FULLSCREEN
 const roles = [
-  { text: "DESIGNER", color: "text-amber-400" },
-  { text: "PROBLEM", color: "text-gray-500" },
-  { text: "SOLVER", color: "text-purple-400" },
-  { text: "TECH", color: "text-gray-500" },
   { text: "GENERALIST", color: "text-blue-400" },
-  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "WEB", color: "text-gray-500" },
   { text: "DEVELOPER", color: "text-orange-500" },
   { text: "FREELANCE", color: "text-gray-500" },
   { text: "DESIGNER", color: "text-yellow-400" },
@@ -17,7 +13,7 @@ const roles = [
   { text: "SOLVER", color: "text-pink-400" },
   { text: "TECH", color: "text-gray-500" },
   { text: "GENERALIST", color: "text-blue-500" },
-  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "WEB", color: "text-gray-500" },
   { text: "DEVELOPER", color: "text-red-500" },
   { text: "FREELANCE", color: "text-gray-500" },
   { text: "DESIGNER", color: "text-amber-500" },
@@ -25,7 +21,7 @@ const roles = [
   { text: "SOLVER", color: "text-violet-400" },
   { text: "TECH", color: "text-gray-500" },
   { text: "GENERALIST", color: "text-blue-400" },
-  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "WEB", color: "text-gray-500" },
   { text: "DEVELOPER", color: "text-orange-500" },
   { text: "FREELANCE", color: "text-gray-500" },
   { text: "DESIGNER", color: "text-yellow-400" },
@@ -33,7 +29,7 @@ const roles = [
   { text: "SOLVER", color: "text-purple-400" },
   { text: "TECH", color: "text-gray-500" },
   { text: "GENERALIST", color: "text-blue-400" },
-  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "WEB", color: "text-gray-500" },
   { text: "DEVELOPER", color: "text-orange-500" },
   { text: "FREELANCE", color: "text-gray-500" },
   { text: "DESIGNER", color: "text-amber-400" },
@@ -41,7 +37,7 @@ const roles = [
   { text: "SOLVER", color: "text-pink-400" },
   { text: "TECH", color: "text-gray-500" },
   { text: "GENERALIST", color: "text-blue-500" },
-  { text: "WEBFLOW", color: "text-gray-500" },
+  { text: "WEB", color: "text-gray-500" },
   { text: "DEVELOPER", color: "text-red-500" },
   { text: "FREELANCE", color: "text-gray-500" },
   { text: "DESIGNER", color: "text-amber-500" },
@@ -74,7 +70,6 @@ const HeroSection = () => {
     // Animate the central elements
     if (centralTextRef.current) {
       tl.from(centralTextRef.current.children, {
-        opacity: 0,
         y: 20,
         stagger: 0.1,
         duration: 0.6,
@@ -85,18 +80,16 @@ const HeroSection = () => {
     // Animate the character image with a slight bounce
     if (imageRef.current) {
       tl.from(imageRef.current, {
-        opacity: 0,
-        y: 40,
-        scale: 0.95,
-        duration: 1.2,
+        y: '300',
+        duration: 3,
         ease: "back.out(1.2)"
-      }, 0.2);
+      }, 0.5);
     }
     
     // Create a subtle floating animation for the character
     gsap.to(imageRef.current, {
-      y: "-8px",
-      duration: 2,
+      y: "-10px",
+      duration: 3,
     });
     
     // Create a subtle scale animation for the text layer
@@ -119,7 +112,7 @@ const HeroSection = () => {
     <section 
       id="hero" 
       ref={heroRef}
-      className="h-screen relative overflow-hidden flex items-center justify-center"
+      className="h-screen relative overflow-hidden flex items-center justify-center text-center"
       style={{
         background: "linear-gradient(to bottom, #12141d 0%, #1a1d2d 100%)"
       }}
@@ -158,14 +151,18 @@ const HeroSection = () => {
         <div className="flex flex-col items-center">
           
           {/* Central text */}
+          <div className="flex items-center gap-2 bg-black  px-8 py-3 rounded-full max-w-fit mb-4">
+              <div className="w-5 h-5 rounded-full bg-green-400 animate-pulse-slow"></div>
+              <span className="text-gray-400 text-md">I'm currently available</span>
+            </div>
           <div className="text-center">
             <h1 className="font-extrabold text-white text-3xl md:text-5xl lg:text-6xl mb-3">
-              <span className="text-white">WEBFLOW</span>
+              <span className="text-white">WEB</span>
               <span className="text-orange-500"> DEVELOPER.</span>
             </h1>
             <h2 className="font-extrabold text-white text-3xl md:text-5xl lg:text-6xl mb-4">
               <span className="text-yellow-400">FREELANCE</span>
-              <span className="text-white"> DESIGNER.</span>
+              <span className="text-white"> DEVELOPER.</span>
             </h2>
             <h3 className="font-extrabold text-white text-2xl md:text-4xl lg:text-5xl mb-2">
               <span className="text-purple-500">PROBLEM</span>
