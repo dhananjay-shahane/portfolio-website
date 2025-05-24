@@ -10,7 +10,6 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
   plugins: [
     react(),
-    // Remove Replit-specific plugins for Vercel deployment
   ],
   resolve: {
     alias: {
@@ -19,15 +18,24 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "../attached_assets"),
     },
   },
-  base: "./",
+  base: "/",
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    sourcemap: false,
+    assetsDir: "assets",
+    rollupOptions: {
+      output: {
+        entryFileNames: "assets/[name]-[hash].js",
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash].[ext]",
+        manualChunks: undefined,
+      },
+    },
   },
   server: {
     port: 2424,
   },
-  // Add Vercel-specific optimizations
   define: {
     global: 'globalThis',
   },
